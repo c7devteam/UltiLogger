@@ -36,3 +36,7 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Config
+config/config.json
+config/database.json
