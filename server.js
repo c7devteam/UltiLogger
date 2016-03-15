@@ -1,7 +1,8 @@
 "use strict";
 
-let restify     =   require('restify');
-let config      =   require('./config/config.json');
+let restify         =   require('restify');
+let config          =   require('./config/config.json');
+let loggings_route   =   require('./routes/loggings_route');
 
 /********** SERVER **********/
 restify.CORS.ALLOW_HEADERS.push('accept');
@@ -34,5 +35,8 @@ server.pre(restify.CORS({
 server.get('/', function(request, response, next) {
     return response.json({ message: 'nothing to do here' });
 });
+
+server.post('/logging/text', loggings_route.createTextLogging);
+server.post('/logging/request', loggings_route.createRequestLogging);
 
 module.exports = server;
