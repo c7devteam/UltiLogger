@@ -4,6 +4,7 @@ let restify             =   require('restify');
 let config              =   require('./config/config.json');
 let loggings_route      =   require('./routes/loggings_route');
 let applications_route  =   require('./routes/applications_route');
+let authorization       =   require('./utils/authorization');
 
 /********** SERVER **********/
 restify.CORS.ALLOW_HEADERS.push('accept');
@@ -37,8 +38,8 @@ server.get('/', function(request, response, next) {
     return response.json({ message: 'nothing to do here' });
 });
 
-server.post('/logging/text', loggings_route.create_text_logging);
-server.post('/logging/request', loggings_route.create_request_logging);
+server.post('/logging/text', authorization.ensure_authorized, loggings_route.create_text_logging);
+server.post('/logging/request', authorization.ensure_authorized, loggings_route.create_request_logging);
 server.post('/admin/api_tokens', applications_route.create_api_token);
 
 module.exports = server;
