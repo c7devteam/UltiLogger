@@ -1,6 +1,6 @@
 "use strict";
 let mysql   =   require('mysql');
-let config  =   require('./config.json');
+let config  =   require('../config/config.json');
 
 let connectionPool = mysql.createPool({
     host: config.database.host,
