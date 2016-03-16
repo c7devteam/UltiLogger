@@ -3,7 +3,7 @@ let connectionPool  =   require('../utils/connection');
 let randomToken     = require('rand-token');
 let routes = {};
 
-routes.create_api_token = function(request, response, next) {
+routes.create_application = function(request, response, next) {
     connectionPool.getConnection(function(error, connection) {
         if (error) {
             throw error;

@@ -22,9 +22,11 @@ routes.ensure_authorized = function(request, response, next) {
                 throw error;
             }
             if (result.length > 0) {
-                let application = result[0];
-                request.applicationID = application.id;
-                return next();
+                let application = result[0];                
+                if (application.active == true) {
+                    request.applicationID = application.id;
+                    return next();
+                }
             }
             return response.json(404, {message: 'Your application is not authorized' });
         });

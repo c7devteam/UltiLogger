@@ -2,7 +2,7 @@
 
 let restify             =   require('restify');
 let config              =   require('./config/config.json');
-let loggings_route      =   require('./routes/loggings_route');
+let logs_route          =   require('./routes/logs_route');
 let applications_route  =   require('./routes/applications_route');
 let authorization       =   require('./utils/authorization');
 
@@ -38,8 +38,8 @@ server.get('/', function(request, response, next) {
     return response.json({ message: 'nothing to do here' });
 });
 
-server.post('/logging/text', authorization.ensure_authorized, loggings_route.create_text_logging);
-server.post('/logging/request', authorization.ensure_authorized, loggings_route.create_request_logging);
-server.post('/admin/api_tokens', applications_route.create_api_token);
+server.post('/logs/text', authorization.ensure_authorized, logs_route.create_text_logging);
+server.post('/logs/request', authorization.ensure_authorized, logs_route.create_request_logging);
+server.post('/admin/applications', applications_route.create_application);
 
 module.exports = server;
