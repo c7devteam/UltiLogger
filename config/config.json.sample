@@ -1,0 +1,21 @@
+{
+    "server": {
+        "accepted_clients": [
+          "http://localhost:3000/",
+          "http://localhost:3001",
+          "http://localhost:3002",
+          "*"
+        ],
+        "host": "http://localhost",
+        "port": 3000
+    },
+    "database": {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "ultilogger",
+        "port": 3306,
+        "driver": "mysql",
+        "multipleStatements": true
+    }
+}
