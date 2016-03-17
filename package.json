@@ -4,8 +4,15 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Matthias Ludwig",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.5.2",
+    "mysql": "^2.10.2",
+    "rand-token": "^0.2.1",
+    "restify": "^4.0.4"
+  }
 }
