@@ -26,12 +26,12 @@ routes.create_text_logging = function(request, response, next) {
                 if (tagsArray && tagsArray.length > 0) {
                     addTagsForLog(tagsArray, result.insertId, function(error, result) {
                         if (result == true) {
-                            return response.json({ success: true, message: 'created log' });
+                            return response.json({ success: true, message: 'created text log' });
                         }
                     });
                 }
                 else {
-                    return response.json({ success: true, message: 'created log' });
+                    return response.json({ success: true, message: 'created text log' });
                 }
             }
         });
@@ -59,7 +59,29 @@ var addTagsForLog = function(tagsArray, logID, callback) {
 }
 
 routes.create_request_logging = function(request, response, next) {
-    console.log('create request logging');
+    connectionPool.getConnection(function(error, connection) {
+        if (error) {
+            throw error;
+        }
+        let params = {
+            "applications_id": request.applicationID,
+            "username": request.params.username,
+            "action": request.params.action,
+            "controller": request.params.controller,
+            "params": request.params.params
+        };
+
+        connection.query('INSERT INTO `request_logs` SET ?', params, function(error, result) {
+            connection.release();
+            if (error) {
+                throw error;
+            }
+
+            if (result.affectedRows > 0) {
+                return response.json({ success: true, message: 'created request log' });
+            }
+        });
+    });
 };
 
 module.exports = routes;
