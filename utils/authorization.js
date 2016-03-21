@@ -22,7 +22,7 @@ routes.ensure_authorized = function(request, response, next) {
                 throw error;
             }
             if (result.length > 0) {
-                let application = result[0];                
+                let application = result[0];
                 if (application.active == true) {
                     request.applicationID = application.id;
                     return next();
