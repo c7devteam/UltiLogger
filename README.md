@@ -2,7 +2,7 @@
 
 ## Feature Request: Add Migrations
 
-## Feel free to work and send pull request ##
+## Feel free to fork and send pull request ##
 
 ## How to use ##
 
