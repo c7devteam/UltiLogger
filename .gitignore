@@ -40,3 +40,5 @@ jspm_packages
 # Config
 config/config.json
 config/database.json
+public/*
+tmp/*
