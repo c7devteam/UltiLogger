@@ -65,7 +65,7 @@ routes.create_request_logging = function(request, response, next) {
         }
         let params = {
             "applications_id": request.applicationID,
-            "username": request.params.username,
+            "user_id": request.params.user_id,
             "action": request.params.action,
             "controller": request.params.controller,
             "params": request.params.params
