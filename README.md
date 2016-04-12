@@ -157,11 +157,49 @@ curl -X "POST" "http://localhost:3000/logs/request" \
 }
 ```
 
+### get applications
+
+	GET /admin/applications
+	
+#### response
+```json
+{
+  "applications": [
+    {
+      "id": 1,
+      "name": "mlbrainteaser",
+      "token": "asdsfddq3453",
+      "created_at": "2016-03-17T15:27:29.000Z",
+      "active": 1
+    },
+    {
+      "id": 2,
+      "name": "mlsidekiq",
+      "token": "23zheasdasd",
+      "created_at": "2016-04-12T07:25:03.000Z",
+      "active": 0
+    },
+    {
+      "id": 3,
+      "name": "waff",
+      "token": "adg4t3gwsdfasdasd",
+      "created_at": "2016-04-12T07:25:13.000Z",
+      "active": 0
+    }
+  ]
+}
+```	
+	
+#### sample request
+```	json
+curl -X "GET" "http://localhost:3000/admin/applications"
+```
+
 ### get request_logs for an application ###
 
 	GET /admin/logs/request/application_id
 
-#### sample request
+#### sample
 ```json
 curl -X "GET" "http://localhost:3000/admin/logs/request/1"
 ```
