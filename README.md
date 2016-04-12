@@ -1,12 +1,12 @@
-# UltiLogger #
+# UltiLogger
 
 ## Feature Request: Add Migrations
 
-## Feel free to fork and send pull request ##
+## Feel free to fork and send pull request
 
-## How to use ##
+## How to use
 
-### Installation Guide ###
+### Installation Guide
 
 1. Clone the project via
     <pre>git clone https://github.com/c7devteam/UltiLogger.git</pre>
@@ -21,18 +21,18 @@
 
 
 
-## API ##
+## API
 
-### create an application ###
+### create an application
 
 #### default application is not activated (set active = 1 in database)
 
     POST /admin/applications
     
-#### Body-Parameter ####
+#### Body-Parameter
 * name (required)
 
-#### sample request ####
+#### sample request
 
 ```json
 curl -X "POST" "http://localhost:3000/admin/applications" \
@@ -41,7 +41,7 @@ curl -X "POST" "http://localhost:3000/admin/applications" \
 
 ```
 
-#### Response on success ####
+#### Response on success
 ```json
 {
   "success": true,
@@ -49,7 +49,7 @@ curl -X "POST" "http://localhost:3000/admin/applications" \
 }
 ```
 
-#### Response on error ####
+#### Response on error
 ```json
 {
   "success": false,
@@ -57,20 +57,50 @@ curl -X "POST" "http://localhost:3000/admin/applications" \
 }
 ```
 
-### create text log ###
+### update an application
+
+#### Body-Parameter
+* id (required)
+* active (required)
+
+#### sample request
+```json
+curl -X "POST" "http://localhost:3000/admin/application" \
+	-H "Content-Type: application/json" \
+	-d "{\"id\":\"1\",\"active\":\"0\"}"
+```
+
+#### Response on success
+```json
+{
+  "success": true,
+  "message": "updated application set active to 0"
+}
+```
+
+#### Response on error
+```json
+{
+  "success": false,
+  "message": "no changes were made"
+}
+```
+
+
+### create text log
 
     POST /logs/text
     
-#### Header-Parameter ####
+#### Header-Parameter
 * Authorization (required, get from applications table)
 
 
-#### Body-Parameter ####
+#### Body-Parameter
 
 * text (required)
 * tags (comma separated, optional)
 
-#### sample request with tags ####
+#### sample request with tags
 ```json
 curl -X "POST" "http://localhost:3000/logs/text" \
 	-H "Authorization: qFD2G05N9XmWMAnA" \
@@ -79,7 +109,7 @@ curl -X "POST" "http://localhost:3000/logs/text" \
 
 ```
 
-#### sample request ####
+#### sample request
 ```json
 curl -X "POST" "http://localhost:3000/logs/text" \
 	-H "Authorization: qFD2G05N9XmWMAnA" \
@@ -87,7 +117,7 @@ curl -X "POST" "http://localhost:3000/logs/text" \
 	-d "{\"text\":\"text without tags\"}"
 ```
 
-#### response on success ####
+#### response on success
 ```json
 {
   "success": true,
@@ -95,7 +125,7 @@ curl -X "POST" "http://localhost:3000/logs/text" \
 }
 ```
 
-#### response on error ####
+#### response on error
 ```json
 {
   "success": false,
@@ -110,22 +140,22 @@ curl -X "POST" "http://localhost:3000/logs/text" \
 ```
 
 
-### create request log ###
+### create request log
 
     POST /logs/request
     
-#### Header-Parameter ####
+#### Header-Parameter
 * Authorization (required, get from applications table)
 
 
-#### Body-Parameter ####
+#### Body-Parameter
 
 * username
 * action
 * controller
 * params
 
-#### sample request ####
+#### sample request
 ```json
 curl -X "POST" "http://localhost:3000/logs/request" \
 	-H "Authorization: qFD2G05N9XmWMAnA" \
@@ -135,7 +165,7 @@ curl -X "POST" "http://localhost:3000/logs/request" \
 ```
 
 
-#### response on success ####
+#### response on success
 ```json
 {
   "success": true,
@@ -143,7 +173,7 @@ curl -X "POST" "http://localhost:3000/logs/request" \
 }
 ```
 
-#### response on error ####
+#### response on error
 ```json
 {
   "success": false,
@@ -195,7 +225,7 @@ curl -X "POST" "http://localhost:3000/logs/request" \
 curl -X "GET" "http://localhost:3000/admin/applications"
 ```
 
-### get request_logs for an application ###
+### get request_logs for an application
 
 	GET /admin/logs/request/application_id
 
@@ -204,7 +234,7 @@ curl -X "GET" "http://localhost:3000/admin/applications"
 curl -X "GET" "http://localhost:3000/admin/logs/request/1"
 ```
 
-#### response ####
+#### response
 ```json
 {
   "request_logs": [
@@ -221,7 +251,7 @@ curl -X "GET" "http://localhost:3000/admin/logs/request/1"
 ```
 
 
-### get text_logs for an application ###
+### get text_logs for an application
 
 	GET /admin/logs/text/application_id
 
@@ -230,7 +260,7 @@ curl -X "GET" "http://localhost:3000/admin/logs/request/1"
 curl -X "GET" "http://localhost:3000/admin/logs/text/2"
 ```
 
-#### response ####
+#### response
 ```json
 {
   "text_logs": [
