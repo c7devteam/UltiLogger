@@ -22,6 +22,7 @@ routes.create_application = function(request, response, next) {
                 "token": randomToken.generate(16)
             };
             connection.query('INSERT INTO `applications` SET ?', applicationParams, function(error, result) {
+                connection.release();
                 if (error) {
                     throw error;
                 }
@@ -29,8 +30,23 @@ routes.create_application = function(request, response, next) {
                     return response.json({ success: true, message: 'created new application' });
                 }
             });
-            connection.release();
         });
+    });
+};
+
+routes.get_application = function(request, response, next) {
+    connectionPool.getConnection(function(error, connection) {
+        if (error) {
+            throw error;
+        }
+        connection.query('SELECT * FROM `applications`', function(error, result) {
+            connection.release();
+            if (error) {
+                throw error;
+            }
+            return response.json({applications: result});
+        });
+
     });
 };
 

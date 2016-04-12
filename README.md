@@ -156,3 +156,59 @@ curl -X "POST" "http://localhost:3000/logs/request" \
   "message": "Your application is not authorized"
 }
 ```
+
+### get request_logs for an application ###
+
+	GET /admin/logs/request/application_id
+
+#### sample request
+```json
+curl -X "GET" "http://localhost:3000/admin/logs/request/1"
+```
+
+#### response ####
+```json
+{
+  "request_logs": [
+    {
+      "id": 1,
+      "username": "mludwig",
+      "action": "createLogAction",
+      "controller": "LogController",
+      "params": "{username: hugo, id: 10}",
+      "applications_id": 1
+   }
+  ]
+}
+```
+
+
+### get text_logs for an application ###
+
+	GET /admin/logs/text/application_id
+
+#### sample request
+```json
+curl -X "GET" "http://localhost:3000/admin/logs/text/2"
+```
+
+#### response ####
+```json
+{
+  "text_logs": [
+    {
+      "id": 1,
+      "text": "text with tags",
+      "created_at": "2016-03-17T15:28:44.000Z",
+      "applications_id": 1
+    },
+    {
+      "id": 2,
+      "text": "text with tags",
+      "created_at": "2016-03-17T15:33:32.000Z",
+      "applications_id": 1
+   }
+  ]
+}
+    
+```
