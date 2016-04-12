@@ -14,14 +14,10 @@ routes.create_text_logging = function(request, response, next) {
         "text": request.params.text
     };
     connectionPool.getConnection(function(error, connection) {
-        if (error) {
-            throw error;
-        }
+        if (error) throw error;
         connection.query('INSERT INTO `text_logs` SET ?', params, function(error, result) {
             connection.release();
-            if (error) {
-                throw error;
-            }
+            if (error) throw error;
             if (result.affectedRows > 0) {
                 if (tagsArray && tagsArray.length > 0) {
                     addTagsForLog(tagsArray, result.insertId, function(error, result) {
@@ -45,14 +41,10 @@ var addTagsForLog = function(tagsArray, logID, callback) {
         values.push([tag, logID]);
     });
     connectionPool.getConnection(function(error, connection) {
-        if (error) {
-            throw error;
-        }
+        if (error) throw error;
         connection.query(query, [values], function(error, result) {
             connection.release();
-            if (error) {
-                throw error;
-            }
+            if (error) throw error;
             callback(null, result.affectedRows > 0);
         });
     });
@@ -60,9 +52,7 @@ var addTagsForLog = function(tagsArray, logID, callback) {
 
 routes.create_request_logging = function(request, response, next) {
     connectionPool.getConnection(function(error, connection) {
-        if (error) {
-            throw error;
-        }
+        if (error) throw error;
         let params = {
             "applications_id": request.applicationID,
             "user_id": request.params.user_id,
@@ -73,10 +63,7 @@ routes.create_request_logging = function(request, response, next) {
 
         connection.query('INSERT INTO `request_logs` SET ?', params, function(error, result) {
             connection.release();
-            if (error) {
-                throw error;
-            }
-
+            if (error) throw error;
             if (result.affectedRows > 0) {
                 return response.json({ success: true, message: 'created request log' });
             }
@@ -86,14 +73,10 @@ routes.create_request_logging = function(request, response, next) {
 
 routes.get_request_logs_for_application = function(request, response, next) {
     connectionPool.getConnection(function(error, connection) {
-        if (error) {
-            throw error;
-        }
+        if (error) throw error;
         connection.query('SELECT * FROM `request_logs` WHERE `applications_id` = ?', [request.params.id], function(error, result) {
             connection.release();
-            if (error) {
-                throw error;
-            }
+            if (error) throw error;
             return response.json({request_logs: result});
         });
     });
@@ -101,14 +84,10 @@ routes.get_request_logs_for_application = function(request, response, next) {
 
 routes.get_text_logs_for_application = function(request, response, next) {
     connectionPool.getConnection(function(error, connection) {
-        if (error) {
-            throw error;
-        }
+        if (error) throw error;
         connection.query('SELECT * FROM `text_logs` WHERE `applications_id` = ?', [request.params.id], function(error, result) {
             connection.release();
-            if (error) {
-                throw error;
-            }
+            if (error) throw error; 
             return response.json({text_logs: result});
         });
 

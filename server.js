@@ -44,5 +44,7 @@ server.get('/admin/logs/request/:id', logs_route.get_request_logs_for_applicatio
 server.get('/admin/logs/text/:id', logs_route.get_text_logs_for_application);
 server.post('/admin/applications', applications_route.create_application);
 server.get('/admin/applications', applications_route.get_application);
+server.post('/admin/application', applications_route.update_application);
+
 
 module.exports = server;
