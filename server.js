@@ -41,5 +41,6 @@ server.get('/', function(request, response, next) {
 server.post('/logs/text', authorization.ensure_authorized, logs_route.create_text_logging);
 server.post('/logs/request', authorization.ensure_authorized, logs_route.create_request_logging);
 server.post('/admin/applications', applications_route.create_application);
+server.get('/admin/applications', applications_route.get_application);
 
 module.exports = server;
