@@ -84,4 +84,21 @@ routes.create_request_logging = function(request, response, next) {
     });
 };
 
+routes.get_request_logs_for_application = function(request, response, next) {
+    connectionPool.getConnection(function(error, connection) {
+        if (error) {
+            throw error;
+        }
+        connection.query('SELECT * FROM `request_logs` WHERE `applications_id` = ?', [request.params.id], function(error, result) {
+            connection.release();
+            if (error) {
+                throw error;
+            }
+            return response.json({request_logs: result});
+        });
+    });
+}
+
+
+
 module.exports = routes;
