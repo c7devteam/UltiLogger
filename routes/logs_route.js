@@ -87,7 +87,7 @@ routes.get_text_logs_for_application = function(request, response, next) {
         if (error) throw error;
         connection.query('SELECT * FROM `text_logs` WHERE `applications_id` = ?', [request.params.id], function(error, result) {
             connection.release();
-            if (error) throw error; 
+            if (error) throw error;
             return response.json({text_logs: result});
         });
 
