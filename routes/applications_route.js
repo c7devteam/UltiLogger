@@ -8,6 +8,7 @@ routes.create_application = function(request, response, next) {
     connectionPool.getConnection(function(error, connection) {
         if (error) throw error;
         connection.query('SELECT * FROM `applications` WHERE `name` = ?', [request.params.name], function(error, result) {
+            connection.release();
             if (error) throw error;
             if (result.length > 0) {
                 connection.release();
