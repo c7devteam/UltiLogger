@@ -42,6 +42,7 @@ server.post('/logs/text', authorization.ensure_authorized, logs_route.create_tex
 server.post('/logs/request', authorization.ensure_authorized, logs_route.create_request_logging);
 server.get('/admin/logs/request/:id', logs_route.get_request_logs_for_application);
 server.get('/admin/logs/text/:id', logs_route.get_text_logs_for_application);
+server.get('/admin/logs/text/tags/:id', logs_route.get_tags_for_text_log);
 server.post('/admin/applications', applications_route.create_application);
 server.get('/admin/applications', applications_route.get_application);
 server.post('/admin/application', applications_route.update_application);

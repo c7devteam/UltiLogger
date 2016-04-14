@@ -94,6 +94,21 @@ routes.get_text_logs_for_application = function(request, response, next) {
     });
 };
 
+routes.get_tags_for_text_log = function(request, response, next) {
+    connectionPool.getConnection(function(error, connection) {
+        if (error) throw error;
+        connection.query('SELECT * FROM `tags` WHERE `text_logs_id` = ?', [request.params.id], function(error, result) {
+            connection.release();
+            result.forEach(function(item) {
+                delete item['id'];
+                delete item['text_logs_id'];
+                delete item['created_at'];
+            });
+            if (error) throw error;
+            return response.json({tags: result});
+        });
+    });
+};
 
 
 module.exports = routes;
