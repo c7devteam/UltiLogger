@@ -280,3 +280,31 @@ curl -X "GET" "http://localhost:3000/admin/logs/text/2"
 }
     
 ```
+
+### get tags for text_log
+
+	GET /admin/logs/text/tags/text_logs_id
+	
+#### sample request
+```	json
+curl -X "GET" "http://localhost:3000/admin/logs/text/tags/1" \
+	-H "Authorization: hH7SZNXytVwEiuSl"
+```
+
+#### response
+
+```json
+{
+  "tags": [
+    {
+      "text": "one"
+    },
+    {
+      "text": "two"
+    },
+    {
+      "text": "three"
+    }
+  ]
+}
+```
